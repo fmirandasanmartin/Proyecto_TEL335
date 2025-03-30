@@ -1,0 +1,20 @@
+# Usar imagen base de Node
+FROM node:16
+
+# Directorio de trabajo
+WORKDIR /app
+
+# Copiar package.json y package-lock.json
+COPY backend/package*.json ./
+
+# Instalar dependencias
+RUN npm install
+
+# Copiar código fuente del backend
+COPY backend/ .
+
+# Puerto de exposición del backend
+EXPOSE 5000
+
+# Comando de inicio
+CMD ["npm", "start"]

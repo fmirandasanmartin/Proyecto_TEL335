@@ -1,0 +1,23 @@
+# Usar imagen base de Node para React Native
+FROM node:16
+
+# Instalar Expo CLI
+RUN npm install -g expo-cli
+
+# Directorio de trabajo
+WORKDIR /app
+
+# Copiar package.json y package-lock.json
+COPY frontend/package*.json ./
+
+# Instalar dependencias
+RUN npm install
+
+# Copiar código fuente
+COPY frontend/ .
+
+# Exponer puertos de Expo
+EXPOSE 19000 19001
+
+# Comando de inicio
+CMD ["npm", "start"]
