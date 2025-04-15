@@ -9,7 +9,6 @@ Además, la aplicación **almacena su propia base de datos** de animales registr
 * 📍 **Búsqueda Avanzada**: Filtra por **tipo de animal, género, región y estado**.
 * 🏡 **Registro de Animales**: Permite a refugios y rescatistas publicar animales en adopción en la **base de datos propia**.
 * 🔄 **Integración con API Huachitos**: Obtiene datos de animales publicados en la API de Huachitos.
-* 🔐 **Autenticación Segura**: Implementación de **JWT para sesiones seguras**.
 * 📊 **Panel de Gestión**: Historial de actividad, seguimiento de adopciones y registro de acciones.
 * 📢 **Marketing y Visibilidad**: Integración con redes sociales y campañas de adopción.
 
@@ -30,7 +29,5 @@ Además, la aplicación **almacena su propia base de datos** de animales registr
 | POST | `/animales/{id}/imagen` | Permite subir una imagen de un animal |
 | GET | `/equipos` | Lista los refugios y rescatistas registrados en nuestra base de datos |
 | GET | `/equipos/{id}` | Obtiene información detallada de un refugio |
-| POST | `/auth/login` | Iniciar sesión y obtener token JWT |
-| POST | `/auth/register` | Registrar un nuevo usuario |
 
 ## 🐶 ¡Ayuda a encontrar un hogar para los animales! 🐾
