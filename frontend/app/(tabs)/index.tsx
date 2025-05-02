@@ -1,9 +1,12 @@
+// app/(tabs)/index.tsx
 import React from 'react';
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
+import { router } from 'expo-router'; // Importar el router de Expo
 
 const App = () => {
   const handlePress = () => {
-    console.log("Navegar a la lista de animales");
+    // Navegar a la página de catálogo
+    router.push('/catalogo');
   };
 
   return (
