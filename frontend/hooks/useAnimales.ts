@@ -1,6 +1,6 @@
 // hooks/useAnimales.ts
 import { useState, useEffect } from 'react';
-import { animalRepository, Animal } from '../database/Database';
+import { animalService, Animal } from '../services/AnimalService';
 
 export function useAnimales(tipo: string = '') {
   const [animales, setAnimales] = useState<Animal[]>([]);
@@ -21,10 +21,10 @@ export function useAnimales(tipo: string = '') {
         
         // Si hay un tipo seleccionado, filtramos por ese tipo
         if (tipo) {
-          resultados = await animalRepository.getAnimalesPorTipo(tipo);
+          resultados = await animalService.getAnimalesPorTipo(tipo);
         } else {
           // Si no hay tipo, obtenemos todos
-          resultados = await animalRepository.getAnimales();
+          resultados = await animalService.getAnimales();
         }
         
         if (mounted) {
@@ -33,7 +33,7 @@ export function useAnimales(tipo: string = '') {
       } catch (err) {
         console.error('Error al cargar animales:', err);
         if (mounted) {
-          setError('Hubo un error al cargar los animales. Por favor, intenta de nuevo.');
+          setError(err instanceof Error ? err.message : 'Hubo un error al cargar los animales. Por favor, intenta de nuevo.');
         }
       } finally {
         if (mounted) {
@@ -49,5 +49,28 @@ export function useAnimales(tipo: string = '') {
     };
   }, [tipo]);
 
-  return { animales, cargando, error };
+  // Función para recargar los datos manualmente
+  const recargar = async () => {
+    setCargando(true);
+    setError(null);
+    
+    try {
+      let resultados: Animal[];
+      
+      if (tipo) {
+        resultados = await animalService.getAnimalesPorTipo(tipo);
+      } else {
+        resultados = await animalService.getAnimales();
+      }
+      
+      setAnimales(resultados);
+    } catch (err) {
+      console.error('Error al recargar animales:', err);
+      setError(err instanceof Error ? err.message : 'Hubo un error al cargar los animales. Por favor, intenta de nuevo.');
+    } finally {
+      setCargando(false);
+    }
+  };
+
+  return { animales, cargando, error, recargar };
 }
